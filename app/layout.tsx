@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import {Inter, Poppins} from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/sidebar";
 
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-});
-
-const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
-
 
 export const metadata: Metadata = {
-  title: "Zeno",
-  description: "Systeme de gestion de clients de la Zoldick",
+  title: "ZENO - Suivi de projets clients",
+  description:
+    "Application de suivi de l'évolution des projets clients avec gestion des documents",
 };
 
 export default function RootLayout({
@@ -26,12 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} ${poppins.className} antialiased`}>
-        <Sidebar />
-        <main className="ml-60">
-          {children}
-        </main>
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
+      </head>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        <div className="min-h-screen bg-background text-foreground">
+          <Sidebar />
+          <main className="lg:ml-64 transition-all duration-300">
+            <div className="max-w-7xl mx-auto p-4 lg:p-6">{children}</div>
+          </main>
+        </div>
       </body>
     </html>
   );
